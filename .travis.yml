@@ -1,4 +1,3 @@
-sudo: required
 services:
   - docker
 
@@ -7,3 +6,13 @@ before_install:
   
 script:
   - docker run fuqing04/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react"
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-533227296170"
+  bucket_path: "docker-react"
+  on:
+    branch: master
